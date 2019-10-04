@@ -1,6 +1,6 @@
 <?php
 
-namespace ZfElasticSearch\Client;
+namespace AlBundy\ZfElasticSearch\Client;
 
 use Elasticsearch\Serializers\SerializerInterface;
 

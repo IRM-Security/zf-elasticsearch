@@ -1,8 +1,8 @@
 <?php
 
-namespace ZfElasticSearch\Type;
+namespace AlBundy\ZfElasticSearch\Type;
 
-use ZfElasticSearch\Document\AbstractDocument;
+use AlBundy\ZfElasticSearch\Document\AbstractDocument;
 
 /**
  * Class AbstractType

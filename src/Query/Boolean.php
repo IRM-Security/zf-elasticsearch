@@ -1,6 +1,6 @@
 <?php
 
-namespace ZfElasticSearch\Query;
+namespace AlBundy\ZfElasticSearch\Query;
 
 class Boolean
 {

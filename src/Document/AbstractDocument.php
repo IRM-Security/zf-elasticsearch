@@ -1,6 +1,6 @@
 <?php
 
-namespace ZfElasticSearch\Document;
+namespace AlBundy\ZfElasticSearch\Document;
 
 /**
  * Class AbstractDocument

@@ -1,10 +1,10 @@
 <?php
 
-namespace ZfElasticSearch\Repository;
+namespace AlBundy\ZfElasticSearch\Repository;
 
 use Elasticsearch\Client;
-use ZfElasticSearch\Document\AbstractDocument;
-use ZfElasticSearch\Type\AbstractType;
+use AlBundy\ZfElasticSearch\Document\AbstractDocument;
+use AlBundy\ZfElasticSearch\Type\AbstractType;
 
 /**
  * ArticleType Object

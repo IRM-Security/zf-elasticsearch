@@ -1,8 +1,8 @@
 <?php
 
-namespace ZfElasticSearch\Repository;
+namespace AlBundy\ZfElasticSearch\Repository;
 
-use ZfElasticSearch\Query\Boolean;
+use AlBundy\ZfElasticSearch\Query\Boolean;
 
 class QueryBuilder
 {

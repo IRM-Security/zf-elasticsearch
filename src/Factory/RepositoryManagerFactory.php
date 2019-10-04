@@ -1,11 +1,11 @@
 <?php
 
-namespace ZfElasticSearch\Factory;
+namespace AlBundy\ZfElasticSearch\Factory;
 
-use ZfElasticSearch\Client\JsonSerializer;
 use Elasticsearch\ClientBuilder;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
+use AlBundy\ZfElasticSearch\Client\JsonSerializer;
 
 /**
  * Class AbstractRepositoryService

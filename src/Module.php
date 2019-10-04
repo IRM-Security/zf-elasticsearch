@@ -1,11 +1,11 @@
 <?php
 
-namespace ZfElasticSearch;
+namespace AlBundy\ZfElasticSearch;
 
-//use ZfElasticSearch\Document\AbstractDocument;
-use ZfElasticSearch\Factory\RepositoryManagerFactory;
-use ZfElasticSearch\Repository\RepositoryManager;
-//use ZfElasticSearch\Type\AbstractType;
+//use AlBundy\ZfElasticSearch\Document\AbstractDocument;
+use AlBundy\ZfElasticSearch\Factory\RepositoryManagerFactory;
+use AlBundy\ZfElasticSearch\Repository\RepositoryManager;
+//use AlBundy\ZfElasticSearch\Type\AbstractType;
 
 class Module
 {

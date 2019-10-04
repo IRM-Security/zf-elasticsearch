@@ -1,6 +1,6 @@
 <?php
 
-namespace ZfElasticSearch\Repository;
+namespace AlBundy\ZfElasticSearch\Repository;
 
 use Elasticsearch\Client;
 
