@@ -1,1 +1,1 @@
-# zf-auth
+# zf-elasticsearch
