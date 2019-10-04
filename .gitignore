@@ -1,0 +1,17 @@
+vendor/
+.DS_Store
+nbproject
+*.log
+._*
+.vagrant
+.~lock.*
+deployment.properties
+.buildpath
+.settings
+.project
+.svn
+.idea
+.php_cs.cache
+cs_fixer_tmp*
+!.gitkeep
+!.gitignore
