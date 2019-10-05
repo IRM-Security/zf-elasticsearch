@@ -42,7 +42,23 @@ abstract class AbstractType
      */
     public function getName(): string
     {
-        return get_class($this);
+        return $this->config['name'] ?? get_class($this);
+    }
+
+    /**
+     * @return string
+     */
+    public function getIndex(): string
+    {
+        return $this->config['index'];
+    }
+
+    /**
+     * @return array
+     */
+    public function getProperties(): array
+    {
+        return $this->config['properties'] ?? [];
     }
 
     /**

@@ -19,7 +19,9 @@ class Module
                     'index' => 'test',
                 ],
 //                AbstractType::class => [
+//                    'name' => 'AbstractType',
 //                    'document' => AbstractDocument::class,
+//                    'index' => 'test',
 //                    'properties' => [
 //                        'id' => [
 //                            'type' => 'integer',
@@ -47,7 +49,6 @@ class Module
 //                        'publishedDate' => [
 //                            'type' => 'date',
 //                        ],
-//                        'index' => 'test',
 //                    ]
 //                ]
             ],

@@ -48,7 +48,7 @@ class RepositoryManager
         if (empty($this->repositories[$type])) {
             $serviceConfig = $this->config[$type];
 
-            if (empty($serviceConfig['index'])) {
+            if (empty($serviceConfig['index']) && !empty($this->config['dsn']['index'])) {
                 $serviceConfig['index'] = $this->config['dsn']['index'];
             }
 
