@@ -55,25 +55,25 @@ class DefaultRepository
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
-        return $this->getType()->getConfig()['name'];
+        return $this->getType()->getName();
     }
 
     /**
      * @return string
      */
-    public function getIndex()
+    public function getIndex(): string
     {
-        return $this->getType()->getConfig()['index'];
+        return $this->getType()->getIndex();
     }
 
     /**
      * @return array
      */
-    public function getProperties()
+    public function getProperties(): array
     {
-        return $this->getType()->getConfig()['properties'];
+        return $this->getType()->getProperties();
     }
 
     /**
