@@ -77,6 +77,14 @@ class DefaultRepository
     }
 
     /**
+     * @return array
+     */
+    public function getSettings(): array
+    {
+        return $this->getType()->getSettings();
+    }
+
+    /**
      * @return QueryBuilder
      */
     public function getQueryBuilder()

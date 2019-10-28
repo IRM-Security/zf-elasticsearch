@@ -113,7 +113,24 @@ class RepositoryManager
      */
     public function createRepository(DefaultRepository $repository)
     {
-        $indexConfig = [
+        $this->client->indices()->close([
+            'index' => $repository->getIndex(),
+        ]);
+
+        ///
+
+        $settings = [
+            'index' => $repository->getIndex(),
+            'body' => [
+                'settings' => $repository->getSettings(),
+            ],
+        ];
+
+        $settings = $this->client->indices()->putSettings($settings);
+
+        ///
+
+        $mapping = [
             'index' => $repository->getIndex(),
             'type' => $repository->getName(),
             'body' => [
@@ -123,7 +140,12 @@ class RepositoryManager
             ],
         ];
 
-        return $this->client->indices()->putMapping($indexConfig);
+        $mapping = $this->client->indices()->putMapping($mapping);
+
+        return [
+            'settings' => $settings,
+            'mapping' => $mapping
+        ];
     }
 
     /**

@@ -62,6 +62,14 @@ abstract class AbstractType
     }
 
     /**
+     * @return array
+     */
+    public function getSettings(): array
+    {
+        return $this->config['settings('] ?? [];
+    }
+
+    /**
      * @return AbstractDocument
      */
     public function getDocument(): AbstractDocument
