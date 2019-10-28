@@ -109,9 +109,8 @@ class RepositoryManager
 
     /**
      * @param DefaultRepository $repository
-     * @return array
      */
-    public function createRepository(DefaultRepository $repository)
+    public function createRepository(DefaultRepository $repository): void
     {
         $this->client->indices()->close([
             'index' => $repository->getIndex(),
@@ -119,14 +118,15 @@ class RepositoryManager
 
         ///
 
-        $settings = [
-            'index' => $repository->getIndex(),
-            'body' => [
-                'settings' => $repository->getSettings(),
-            ],
-        ];
-
-        $settings = $this->client->indices()->putSettings($settings);
+        if ($repository->getSettings()) {
+            $settings = [
+                'index' => $repository->getIndex(),
+                'body' => [
+                    'settings' => $repository->getSettings(),
+                ],
+            ];
+            $settings = $this->client->indices()->putSettings($settings);
+        }
 
         ///
 
@@ -145,11 +145,6 @@ class RepositoryManager
         $this->client->indices()->open([
             'index' => $repository->getIndex(),
         ]);
-
-        return [
-            'settings' => $settings,
-            'mapping' => $mapping
-        ];
     }
 
     /**
