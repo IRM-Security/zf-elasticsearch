@@ -67,6 +67,14 @@ class Clause
     }
 
     /**
+     *
+     */
+    public function prefix()
+    {
+        return $this->subClause('prefix');
+    }
+
+    /**
      * @param $key
      * @return SubClause
      */
