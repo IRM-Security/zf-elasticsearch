@@ -142,6 +142,10 @@ class RepositoryManager
 
         $mapping = $this->client->indices()->putMapping($mapping);
 
+        $this->client->indices()->open([
+            'index' => $repository->getIndex(),
+        ]);
+
         return [
             'settings' => $settings,
             'mapping' => $mapping
