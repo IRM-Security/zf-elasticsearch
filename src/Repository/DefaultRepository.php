@@ -127,6 +127,25 @@ class DefaultRepository
     }
 
     /**
+     * @param $document
+     * @return array
+     */
+    public function update(AbstractDocument $document)
+    {
+        $body = $document->toArray();
+
+        $params = [
+            'index' => $this->getIndex(),
+            'type' => $this->getType()->getName(),
+            'refresh' => true,
+            'body' => ['doc' => $body],
+            'id' => $body['id'] ?? null
+        ];
+
+        return $this->getClient()->update($params);
+    }
+
+    /**
      * @param $id
      * @return array
      */
