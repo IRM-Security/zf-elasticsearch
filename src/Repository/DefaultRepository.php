@@ -108,17 +108,18 @@ class DefaultRepository
     }
 
     /**
-     * @param $document
+     * @param AbstractDocument $document
+     * @param bool $refresh
      * @return array
      */
-    public function save(AbstractDocument $document)
+    public function save(AbstractDocument $document, bool $refresh)
     {
         $body = $document->toArray();
 
         $params = [
             'index' => $this->getIndex(),
             'type' => $this->getType()->getName(),
-            'refresh' => true,
+            'refresh' => $refresh,
             'body' => $body,
             'id' => $body['id'] ?? null
         ];
@@ -127,17 +128,18 @@ class DefaultRepository
     }
 
     /**
-     * @param $document
+     * @param AbstractDocument $document
+     * @param bool $refresh
      * @return array
      */
-    public function update(AbstractDocument $document)
+    public function update(AbstractDocument $document, bool $refresh)
     {
         $body = $document->toArray();
 
         $params = [
             'index' => $this->getIndex(),
             'type' => $this->getType()->getName(),
-            'refresh' => true,
+            'refresh' => $refresh,
             'body' => ['doc' => $body],
             'id' => $body['id'] ?? null
         ];
