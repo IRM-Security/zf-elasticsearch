@@ -4,14 +4,13 @@ namespace AlBundy\ZfElasticSearch\Factory;
 
 use Elasticsearch\ClientBuilder;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
 use AlBundy\ZfElasticSearch\Client\JsonSerializer;
 
 /**
  * Class AbstractRepositoryService
  * @package Elastic\Repository
  */
-class RepositoryManagerFactory implements FactoryInterface
+class RepositoryManagerFactory
 {
     /**
      * @inheritDoc
