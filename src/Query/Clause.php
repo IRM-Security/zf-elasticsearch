@@ -21,7 +21,7 @@ class Clause
     /**
      *
      */
-    public function multiMatch()
+    public function multiMatch(): SubClause
     {
         return $this->subClause('multi_match');
     }
@@ -29,7 +29,7 @@ class Clause
     /**
      *
      */
-    public function match()
+    public function match(): SubClause
     {
         return $this->subClause('match');
     }
@@ -37,7 +37,7 @@ class Clause
     /**
      *
      */
-    public function matchPhrase()
+    public function matchPhrase(): SubClause
     {
         return $this->subClause('match_phrase');
     }
@@ -45,7 +45,7 @@ class Clause
     /**
      *
      */
-    public function term()
+    public function term(): SubClause
     {
         return $this->subClause('term');
     }
@@ -53,7 +53,7 @@ class Clause
     /**
      *
      */
-    public function terms()
+    public function terms(): SubClause
     {
         return $this->subClause('terms');
     }
@@ -61,7 +61,7 @@ class Clause
     /**
      *
      */
-    public function range()
+    public function range(): SubClause
     {
         return $this->subClause('range');
     }
@@ -69,16 +69,39 @@ class Clause
     /**
      *
      */
-    public function prefix()
+    public function prefix(): SubClause
     {
         return $this->subClause('prefix');
     }
 
     /**
-     * @param $key
-     * @return SubClause
+     * @param $clause
+     * @param null $key
      */
-    private function subClause($key)
+    public function add($clause, $key = null): void
+    {
+        if (is_null($key)) {
+            $this->body[] = $clause;
+        } else {
+            $this->body[$key] = $clause;
+        }
+    }
+
+    public function bool(): \AlBundy\ZfElasticSearch\Query\Boolean
+    {
+        if (empty($this->bool)) {
+            if (empty($this->body)) {
+                $this->body = [];
+            }
+            $bool = ['bool' => []];
+            $this->body[] = &$bool;
+            $this->bool = new Boolean($bool['bool']);
+        }
+
+        return $this->bool;
+    }
+
+    private function subClause(string $key): SubClause
     {
         if (empty($this->{$key})) {
             if (empty($this->body)) {

@@ -2,9 +2,9 @@
 
 namespace AlBundy\ZfElasticSearch\Repository;
 
-use Elasticsearch\Client;
 use AlBundy\ZfElasticSearch\Document\AbstractDocument;
 use AlBundy\ZfElasticSearch\Type\AbstractType;
+use Elasticsearch\Client;
 
 /**
  * ArticleType Object
@@ -109,40 +109,51 @@ class DefaultRepository
 
     /**
      * @param AbstractDocument $document
-     * @param bool $refresh
+     * @param array $options
      * @return array
      */
-    public function save(AbstractDocument $document, bool $refresh)
+    public function save(AbstractDocument $document, array $options = [])
     {
         $body = $document->toArray();
 
         $params = [
             'index' => $this->getIndex(),
             'type' => $this->getType()->getName(),
-            'refresh' => $refresh,
             'body' => $body,
             'id' => $body['id'] ?? null
         ];
+
+        $defaults = [
+            'refresh' => true
+        ];
+
+        $this->addOptions($params, array_merge($defaults, $options));
 
         return $this->getClient()->index($params);
     }
 
     /**
      * @param AbstractDocument $document
-     * @param bool $refresh
+     * @param array $options
      * @return array
      */
-    public function update(AbstractDocument $document, bool $refresh)
+    public function update(AbstractDocument $document, array $options = [])
     {
         $body = $document->toArray();
 
         $params = [
             'index' => $this->getIndex(),
             'type' => $this->getType()->getName(),
-            'refresh' => $refresh,
             'body' => ['doc' => $body],
             'id' => $body['id'] ?? null
         ];
+
+        $defaults = [
+            'refresh' => false,
+            'retry_on_conflict' => 1,
+        ];
+
+        $this->addOptions($params, array_merge($defaults, $options));
 
         return $this->getClient()->update($params);
     }
@@ -204,5 +215,15 @@ class DefaultRepository
         } while (true);
 
         return $offset;
+    }
+
+    private function addOptions(array &$params, array $options)
+    {
+        foreach ($options as $k => $v) {
+            if (isset($params[$k])) {
+                continue;
+            }
+            $params[$k] = $v;
+        }
     }
 }
