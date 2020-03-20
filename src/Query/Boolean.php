@@ -97,4 +97,12 @@ class Boolean
 
         return $this->should;
     }
+
+    /**
+     * @param int $minimum
+     */
+    public function minimumShouldMatch($minimum)
+    {
+        $this->body['minimum_should_match'] = (int)$minimum;
+    }
 }
