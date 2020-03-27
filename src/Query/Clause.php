@@ -112,4 +112,21 @@ class Clause
 
         return $this->{$key};
     }
+
+    /**
+     * @return Nested
+     */
+    public function nested(): Nested
+    {
+        if (empty($this->nested)) {
+            if (empty($this->nested)) {
+                $this->body = [];
+            }
+            $nested = ['nested' => []];
+            $this->body[] = &$nested;
+            $this->nested = new Nested($nested['nested']);
+        }
+
+        return $this->nested;
+    }
 }
