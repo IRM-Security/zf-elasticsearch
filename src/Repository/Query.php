@@ -71,4 +71,9 @@ class Query
 
         return $result;
     }
+
+    public function getBody()
+    {
+        return json_encode($this->body, JSON_PRETTY_PRINT);
+    }
 }
