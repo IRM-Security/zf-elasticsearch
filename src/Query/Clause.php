@@ -114,12 +114,13 @@ class Clause
     }
 
     /**
+     * @param bool $createNew
      * @return Nested
      */
-    public function nested(): Nested
+    public function nested(bool $createNew = false): Nested
     {
-        if (empty($this->nested)) {
-            if (empty($this->nested)) {
+        if (empty($this->nested) || $createNew) {
+            if (empty($this->body)) {
                 $this->body = [];
             }
             $nested = ['nested' => []];
