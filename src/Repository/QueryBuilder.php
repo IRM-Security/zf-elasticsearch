@@ -17,6 +17,11 @@ class QueryBuilder
     private $bool;
 
     /**
+     * @var
+     */
+    private $nested;
+
+    /**
      * @var DefaultRepository
      */
     private $repository;
@@ -43,6 +48,21 @@ class QueryBuilder
         }
 
         return $this->bool;
+    }
+
+    /**
+     * @return Nested
+     */
+    public function nested()
+    {
+        if (!$this->nested) {
+            if (empty($this->body['query']['nested'])) {
+                $this->body['query']['nested'] = [];
+            }
+            $this->nested = new Nested($this->body['query']['nested']);
+        }
+
+        return $this->nested;
     }
 
     /**
