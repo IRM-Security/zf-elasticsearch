@@ -3,6 +3,7 @@
 namespace AlBundy\ZfElasticSearch\Repository;
 
 use AlBundy\ZfElasticSearch\Query\Boolean;
+use AlBundy\ZfElasticSearch\Query\Aggs;
 
 class QueryBuilder
 {
@@ -15,6 +16,11 @@ class QueryBuilder
      * @var
      */
     private $bool;
+
+    /**
+     * @var
+     */
+    private $aggs;
 
     /**
      * @var
@@ -48,6 +54,25 @@ class QueryBuilder
         }
 
         return $this->bool;
+    }
+
+    /**
+     * @return Aggs
+     */
+    public function aggs(string $name)
+    {
+        if (!$this->aggs[$name]) {
+            if (empty($this->body['aggs'])) {
+                $this->body['aggs'] = [];
+            }
+            if (empty($this->body['aggs'][$name])) {
+                $this->body['aggs'][$name] = [];
+            }
+
+            $this->aggs[$name] = new Aggs($this->body['aggs'][$name]);
+        }
+
+        return $this->aggs[$name];
     }
 
     /**
