@@ -101,6 +101,18 @@ class Clause
         return $this->bool;
     }
 
+    public function aggs(string $name): Aggs
+    {
+        if (empty($this->aggs)) {
+            if (empty($this->aggs[$name])) {
+                $this->body['aggs'][$name] = [];
+            }
+            $this->aggs[$name] = new Aggs($this->body['aggs'][$name]);
+        }
+
+        return $this->aggs[$name];
+    }
+
     private function subClause(string $key): SubClause
     {
         if (empty($this->{$key})) {
