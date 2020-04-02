@@ -24,27 +24,6 @@ class Nested
     }
 
     /**
-     * @var Clause
-     */
-    private $path;
-
-    /**
-     *
-     */
-    public function path($value)
-    {
-        if (!$this->path) {
-            if (empty($this->body['path'])) {
-                $this->body['path'] = $value;
-            }
-            $this->path = $value;
-        }
-
-        return $this;
-    }
-
-
-    /**
      *
      */
     public function bool()

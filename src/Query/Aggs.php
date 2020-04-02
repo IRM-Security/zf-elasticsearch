@@ -3,7 +3,6 @@
 namespace AlBundy\ZfElasticSearch\Query;
 
 use AlBundy\ZfElasticSearch\Query\Terms\Terms;
-use Laminas\Hydrator\ClassMethodsHydrator;
 
 class Aggs
 {

@@ -113,6 +113,24 @@ class Clause
         return $this->aggs[$name];
     }
 
+    /**
+     * @return Nested
+     */
+    public function nested(string $path): Nested
+    {
+        if (empty($this->nested[$path])) {
+            $nested = [
+                'nested' => [
+                    'path' => $path
+                ]
+            ];
+            $this->body[] = &$nested;
+            $this->nested[$path] = new Nested($nested['nested']);
+        }
+
+        return $this->nested[$path];
+    }
+
     private function subClause(string $key): SubClause
     {
         if (empty($this->{$key})) {
@@ -123,22 +141,5 @@ class Clause
         }
 
         return $this->{$key};
-    }
-
-    /**
-     * @return Nested
-     */
-    public function nested(): Nested
-    {
-        if (empty($this->nested)) {
-            if (empty($this->nested)) {
-                $this->body = [];
-            }
-            $nested = ['nested' => []];
-            $this->body[] = &$nested;
-            $this->nested = new Nested($nested['nested']);
-        }
-
-        return $this->nested;
     }
 }
