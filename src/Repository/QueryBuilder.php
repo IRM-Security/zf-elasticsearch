@@ -4,6 +4,7 @@ namespace AlBundy\ZfElasticSearch\Repository;
 
 use AlBundy\ZfElasticSearch\Query\Boolean;
 use AlBundy\ZfElasticSearch\Query\Aggs;
+use AlBundy\ZfElasticSearch\Query\Nested;
 
 class QueryBuilder
 {
@@ -61,10 +62,7 @@ class QueryBuilder
      */
     public function aggs(string $name)
     {
-        if (!$this->aggs[$name]) {
-            if (empty($this->body['aggs'])) {
-                $this->body['aggs'] = [];
-            }
+        if (empty($this->aggs[$name])) {
             if (empty($this->body['aggs'][$name])) {
                 $this->body['aggs'][$name] = [];
             }
@@ -78,13 +76,13 @@ class QueryBuilder
     /**
      * @return Nested
      */
-    public function nested()
+    public function nested(string $path)
     {
-        if (!$this->nested) {
-            if (empty($this->body['query']['nested'])) {
-                $this->body['query']['nested'] = [];
+        if (empty($this->nested[$path])) {
+            if (empty($this->body['query']['nested'][$path])) {
+                $this->body['query']['nested'][$path] = [];
             }
-            $this->nested = new Nested($this->body['query']['nested']);
+            $this->nested = new Nested($this->body['query']['nested'][$path]);
         }
 
         return $this->nested;
