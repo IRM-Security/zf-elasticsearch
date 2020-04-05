@@ -2,8 +2,13 @@
 
 namespace AlBundy\ZfElasticSearch\Query\Aggs;
 
-class Terms
+class Cardinality
 {
+    /**
+     * const MAX_PRECISION_TRESHOLD
+     */
+    const MAX_PRECISION_TRESHOLD = 400000;
+
     /**
      * @var array
      */
@@ -20,32 +25,21 @@ class Terms
 
     /**
      * @param string $field
-     * @return Terms
+     * @return Cardinality
      */
-    public function setField(string $field): Terms
+    public function setField(string $field): Cardinality
     {
         $this->body['field'] = $field;
         return $this;
     }
 
     /**
-     * @param int $size
-     * @return Terms
+     * @param int $precision
+     * @return Cardinality
      */
-    public function setSize(int $size): Terms
+    public function setPrecisionThreshold(int $precision): Cardinality
     {
-        $this->body['size'] = $size;
-        return $this;
-    }
-
-    /**
-     * @param string $key
-     * @param $value
-     * @return Terms
-     */
-    public function setOrder(string $key, $value): Terms
-    {
-        $this->body['order'][$key] = $value;
+        $this->body['precision_threshold'] = $precision;
         return $this;
     }
 }
