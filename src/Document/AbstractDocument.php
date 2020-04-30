@@ -58,4 +58,9 @@ abstract class AbstractDocument
 
         return $document;
     }
+
+    public function __get($name)
+    {
+        return $this->data[$name];
+    }
 }
