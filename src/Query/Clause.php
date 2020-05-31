@@ -101,6 +101,36 @@ class Clause
         return $this->bool;
     }
 
+    public function aggs(string $name): Aggs
+    {
+        if (empty($this->aggs)) {
+            if (empty($this->aggs[$name])) {
+                $this->body['aggs'][$name] = [];
+            }
+            $this->aggs[$name] = new Aggs($this->body['aggs'][$name]);
+        }
+
+        return $this->aggs[$name];
+    }
+
+    /**
+     * @return Nested
+     */
+    public function nested(string $path): Nested
+    {
+        if (empty($this->nested[$path])) {
+            $nested = [
+                'nested' => [
+                    'path' => $path
+                ]
+            ];
+            $this->body[] = &$nested;
+            $this->nested[$path] = new Nested($nested['nested']);
+        }
+
+        return $this->nested[$path];
+    }
+
     private function subClause(string $key): SubClause
     {
         if (empty($this->{$key})) {
