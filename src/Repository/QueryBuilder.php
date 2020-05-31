@@ -50,6 +50,18 @@ class QueryBuilder
      * @param string|null $order
      * @return QueryBuilder
      */
+    public function setOrderBy(string $sort, string $order = null): self
+    {
+        $this->body['sort'] = [];
+        
+        return $this->addOrderBy($sort, $order);
+    }
+
+    /**
+     * @param string $sort
+     * @param string|null $order
+     * @return QueryBuilder
+     */
     public function addOrderBy(string $sort, string $order = null): self
     {
         $this->body['sort'][] = [$sort => $order ?? 'asc'];
