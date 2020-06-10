@@ -19,9 +19,11 @@ class RepositoryManagerFactory
     {
         $config = $container->get('config')['zf-elasticsearch'];
 
+        $hosts = $config['hosts'] ?? [$config['dsn']['host'] . ':' . $config['dsn']['port']];
+
         $client = ClientBuilder::create()
             ->setSerializer(new JsonSerializer())
-            ->setHosts([$config['dsn']['host'] . ':' . $config['dsn']['port']])
+            ->setHosts($hosts)
             ->build();
 
         return new $requestedName($client, $config);
