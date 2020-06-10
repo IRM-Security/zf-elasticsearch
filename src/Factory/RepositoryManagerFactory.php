@@ -26,6 +26,8 @@ class RepositoryManagerFactory
             ->setHosts($hosts)
             ->build();
 
-        return new $requestedName($client, $config);
+        $documents = $config['documents'] ?? $config;
+
+        return new $requestedName($client, $documents);
     }
 }
