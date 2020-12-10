@@ -142,4 +142,9 @@ class Clause
 
         return $this->{$key};
     }
+
+    public function wildcard(): SubClause
+    {
+        return $this->subClause('wildcard');
+    }
 }
