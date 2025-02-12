@@ -2,8 +2,8 @@
 
 namespace AlBundy\ZfElasticSearch\Repository;
 
-use AlBundy\ZfElasticSearch\Query\Boolean;
 use AlBundy\ZfElasticSearch\Query\Aggs;
+use AlBundy\ZfElasticSearch\Query\Boolean;
 use AlBundy\ZfElasticSearch\Query\Nested;
 
 class QueryBuilder
@@ -161,5 +161,10 @@ class QueryBuilder
         }
 
         return new Query($this->repository, $this->body);
+    }
+
+    public function setSource(string $source): void
+    {
+        $this->body['_source'] = $source;
     }
 }

@@ -14,6 +14,13 @@ class Query
      */
     private $repository;
 
+    private $params = [];
+
+    public function setParams(array $params): void
+    {
+        $this->params = $params;
+    }
+
     /**
      * QueryBuilder constructor.
      * @param DefaultRepository $repository
@@ -29,11 +36,29 @@ class Query
      * @param callable $loader
      * @return mixed
      */
+    public function getRawResult(callable $loader)
+    {
+        $result = $this->search();
+
+        $documents = [];
+
+        foreach ($result['hits']['hits'] as $hit) {
+            $documents[] = $loader($hit);
+        }
+
+        return $documents;
+    }
+
+    /**
+     * @param callable $loader
+     * @return mixed
+     */
     public function getResult(callable $loader)
     {
         $result = $this->search();
 
         $documents = [];
+
         foreach ($result['hits']['hits'] as $hit) {
             $hit['found'] = true;
             $documents[$hit['_id']] = $this->repository->getType()->getDocument()->fromResult($hit);
@@ -63,11 +88,11 @@ class Query
      */
     protected function search()
     {
-        $result = $this->repository->getClient()->search([
+        $result = $this->repository->getClient()->search(array_merge([
             'index' => $this->repository->getIndex(),
             'type' => $this->repository->getType()->getName(),
-            'body' => $this->body,
-        ]);
+            'body' => $this->body
+        ], $this->params));
 
         return $result;
     }
