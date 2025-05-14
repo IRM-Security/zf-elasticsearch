@@ -21,8 +21,6 @@ class DefaultRepository
      */
     private $client;
 
-    private $params = [];
-
     /**
      * ArticleRepository constructor.
      * @param Client $client
@@ -36,11 +34,6 @@ class DefaultRepository
         $this->client = $client;
 
         // FIXME exceptions, interfaces ...
-    }
-
-    public function setParams(array $params): void
-    {
-        $this->params = $params;
     }
 
     /**
@@ -184,7 +177,7 @@ class DefaultRepository
      * @param callable $documentsLoader
      * @return int
      */
-    public function bulkIndex(callable $documentsLoader)
+    public function bulkIndex(callable $documentsLoader, array $options = [])
     {
         $offset = 0;
         $limit = 500;
@@ -212,7 +205,7 @@ class DefaultRepository
                 $params ['body'][] = $document->fromModel($model)->toArray();
             }
 
-            $this->getClient()->bulk(array_merge($this->params, $params));
+            $this->getClient()->bulk(array_merge($options, $params));
 
             if ($documents->count() < $limit) {
                 break;
